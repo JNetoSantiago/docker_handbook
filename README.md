@@ -1,6 +1,17 @@
 # Docker Livro de Mão
 
-## Comandos básicos Docker
+*******
+Tabelas de conteúdo 
+ 1. [Comandos básicos Docker](#basic_commands)
+ 2. [Volumes](#volumes)
+ 3. [Imagens](#images)
+ 4. [Dockerfile](#dockerfile)
+
+*******
+
+<div id="basic_commands" /> 
+
+### Comandos básicos Docker
 
 O comando abaixo lista todos os containers rodando no momento na nossa máquina. Aqui podemos obter informações como o identificador do container, o nome da imagem, o comando executado contra o container, a quanto tempo ele foi criado, as portas que estão expostas e se estão mapeadas, e o nome atribuido ao container.
 ```shell
@@ -68,6 +79,8 @@ Uma vez que um container possua uma porta exposta, podemos mapear uma porta do n
 docker run -d -p 8080:80 nginx
 ```
 
+<div id="volumes" /> 
+
 ### Volumes
 
 Para usar volumes no docker, podemos usar a flag -v ou a flag --mount, ambas terão o mesmo efeito. Com estes comandos, como no exemplo abaixo, o diretório html do meu computador, será mapeada para o diretório html do nginx, assim nossas alterações neste diretório irão persistir.
@@ -96,6 +109,9 @@ Podemos mapear pelo nome do volume criado.
 docker run -d --name nginx -p 8080:80 --mount type=volume,source=nome_do_volume,target=/app nginx
 ```
 
+
+<div id="images" /> 
+
 ### Imagens
 
 Podemos baixar uma imagem com o comando pull.
@@ -112,5 +128,6 @@ O comando a seguir, remove uma imagem baseado no seu nome.
 ```shell
 docker rmi nome_da_imagem
 ```
+<div id="dockerfile" /> 
 
 ### Dockerfile
