@@ -145,6 +145,10 @@ Principais comandos docker:
 * RUN: Esta instrução executará quaisquer comandos em uma nova camada sobre a imagem atual e confirmará os resultados. A imagem confirmada resultante será usada para a próxima etapa no arquivo Dockerfile.
 * WORKDIR: Esta instrução define o diretório de trabalho para qualquer instrução RUN, CMD, ENTRYPOINT, COPY e ADD que o seguem no arquivo Dockerfile. Se WORKDIR não existir, será criado mesmo que não seja utilizado em nenhuma instrução no Dockerfile subseqüente.
 * COPY: Esta instrução copia novos arquivos ou diretórios <src> e os adiciona ao sistema de arquivos do contêiner no caminho <dest>.
+* ENTRYPOINT: Esta instrução define um comando a ser executado contra o container quando o mesmo for inicializado.
+* CMD: Esta instrução define um comando a ser executado contra o container quando o mesmo for inicializado.
+
+ENTRYPOINT Vs CMD: Quando um container for inicializado, o que será executado é a soma de Entrypoint e CMD. Entretanto o CMD é dinâmico e pode ser facilmente substituido na chamada de um docker run. O ENRTYPOINT foi feito para ser estático.
 
 Para isto precisamos criar um arquivo com o nome Dockerfile. Vejamos um exmplo de um Dockerfile com as instruções acima:
 ```Dockerfile
@@ -156,4 +160,7 @@ RUN apt-get update
 RUN apt-get install vim -y
 
 COPY html/ /usr/share/nginx/html
+
+ENTRYPOINT [ "echo", "Hello" ]
+CMD ["World"]
 ```
