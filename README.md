@@ -1,4 +1,4 @@
-# Docker Livro de Mão
+# Pequeno guia Docker
 
 *******
 Tabelas de conteúdo 
@@ -6,6 +6,7 @@ Tabelas de conteúdo
  2. [Volumes](#volumes)
  3. [Imagens](#images)
  4. [Dockerfile](#dockerfile)
+ 4. [Networks](#dockerfile)
 
 *******
 
@@ -48,6 +49,11 @@ docker run --name nginx nginx
 Podemos deixar o container rodando em background com a flag -d.
 ```shell
 docker run -d nginx
+```
+
+Podemos também, nos conectarmos ao bash de um container
+```shell
+docker attach nginx
 ```
 
 Quando damos um docker ps -a, temos uma lista com os containers que estão ativos e parados, uma vez que um container está parado, podemos atraves do comando start, levantar o container, informando o id do container ou o nome do mesmo.
@@ -131,3 +137,23 @@ docker rmi nome_da_imagem
 <div id="dockerfile" /> 
 
 ### Dockerfile
+
+O Dockerfile é um arquivo com instruções que o docker deve seguir a fim de construir nosso container automaticamente. Neste documento de texto, contem todos os comandos que um usuário precisa para construir uma imagem.
+
+Principais comandos docker:
+* FROM: Esta instrução deve ser a primeira do Dockerfile, apenas ARG pode preceder está instrução. Ela define a imagem base para as próximas instruções.
+* RUN: Esta instrução executará quaisquer comandos em uma nova camada sobre a imagem atual e confirmará os resultados. A imagem confirmada resultante será usada para a próxima etapa no arquivo Dockerfile.
+* WORKDIR: Esta instrução define o diretório de trabalho para qualquer instrução RUN, CMD, ENTRYPOINT, COPY e ADD que o seguem no arquivo Dockerfile. Se WORKDIR não existir, será criado mesmo que não seja utilizado em nenhuma instrução no Dockerfile subseqüente.
+* COPY: Esta instrução copia novos arquivos ou diretórios <src> e os adiciona ao sistema de arquivos do contêiner no caminho <dest>.
+
+Para isto precisamos criar um arquivo com o nome Dockerfile. Vejamos um exmplo de um Dockerfile com as instruções acima:
+```Dockerfile
+FROM nginx:latest
+
+WORKDIR /app
+
+RUN apt-get update
+RUN apt-get install vim -y
+
+COPY html/ /usr/share/nginx/html
+```
