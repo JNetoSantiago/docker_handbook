@@ -177,7 +177,7 @@ docker run --rm --name laravel -p 8000:8000 joao/laravel
 
 <div id="networks" /> 
 
-### Imagens
+### Networks
 
 No docker possuimos alguns tipos de networks. Elas servem para fazer com que os containers consigam se comunicar entre si.
 * Bridge: Esta bridge é a padrão.
