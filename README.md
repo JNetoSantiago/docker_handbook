@@ -164,3 +164,13 @@ COPY html/ /usr/share/nginx/html
 ENTRYPOINT [ "echo", "Hello" ]
 CMD ["World"]
 ```
+
+Para construir nosso container:
+```shell
+docker build -t joao/laravel:latest .
+```
+
+Para construir nosso container:
+```shell
+docker run --rm --name laravel -p 8000:8000 joao/laravel
+```
