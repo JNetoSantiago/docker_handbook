@@ -6,7 +6,7 @@ Tabelas de conteúdo
  2. [Volumes](#volumes)
  3. [Imagens](#images)
  4. [Dockerfile](#dockerfile)
- 4. [Networks](#dockerfile)
+ 4. [Networks](#networks)
 
 *******
 
@@ -173,4 +173,45 @@ docker build -t joao/laravel:latest .
 Para construir nosso container:
 ```shell
 docker run --rm --name laravel -p 8000:8000 joao/laravel
+```
+
+<div id="networks" /> 
+
+### Imagens
+
+No docker possuimos alguns tipos de networks. Elas servem para fazer com que os containers consigam se comunicar entre si.
+* Bridge: Esta bridge é a padrão.
+* Host: Este tipo de network, mescla a network do docker com a network de seu host. Assim, a máquina consegue acessar uma porta do container sem precisar de um expose daquela porta.
+* Overlay: Não é um tipo comum, ele vai fazer com que vários dockers em máquinas diferentes se comuniquem como se cada um estivesse na mesma rede.
+* Macvlan
+* None: Quando o container roda sem rede nenhuma.
+
+O comando abaixo lista todas as redes:
+```shell
+docker network ls
+```
+
+Se quisermos apagar todas as redes, podemos rodar o comando abaixo:
+```shell
+docker network prune
+```
+
+Podemos ver os detalhes da nossa rede:
+```shell
+docker network inspect bridge
+```
+
+Podemos criar uma rede especificando o driver:
+```shell
+docker network create -driver bridge minharede
+```
+
+Para conectar um container a uma rede:
+```shell
+docker network connect minharede nome_do_container
+```
+
+ou no ato da criação do container
+```shell
+docker run -d -it -name ubuntu -network minharede bash
 ```
